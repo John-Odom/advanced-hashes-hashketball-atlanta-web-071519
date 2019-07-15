@@ -120,17 +120,9 @@ end
 
 def player_stats (player_name)
   game_hash.map do |type_game, team_info|
-    team_info.map do |team_stuff, answer_to_stuff|
-      if answer_to_stuff.kind_of?(Array)
-        answer_to_stuff.map do |colors_players|
-          if colors_players.kind_of?(Hash)
-            colors_players.map do |name, stat_line|
-                if player_name == name
-                  return stat_line
-              end
-            end
-          end
-        end
+    team_info[:players].find do |player|
+      if player.keys[0] == player_name
+        return player.values[0]
       end
     end
   end
